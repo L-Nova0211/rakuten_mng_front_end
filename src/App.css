@@ -1,38 +1,603 @@
-.App {
+/* Global */
+@font-face {
+  font-family: 'NotoSansJP-Regular';
+  src: url(../public/font/NotoSansJP-Regular.ttf);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'NotoSansJP-Regular';
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  width: 90%;
+  margin: auto;
+}
+
+.row {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.red {
+  color: #ff6e6e;
+}
+
+input {
+  width: 100%;
+  color: #555555;
+  font-size: 14px;
+  font-family: 'NotoSansJP-Regular';
+  padding: 15px 10px;
+  outline: none;
+  border: 1px solid black;    
+  transition: 0.4s;
+}
+
+input.warning {
+  border-color: #ff6e6e;
+}
+
+/* Button */
+button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'NotoSansJP-Regular';
+  cursor: pointer;
+}
+
+button svg {
+  margin-right: 10px;
+}
+
+.btn {
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 14px;
+
+}
+
+.btn-green {
+  background-color: #00dbde;
+}
+
+.btn-red {
+  background-color: #ff6e6e;
+}
+
+.btn-disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+/* Button */
+
+/* Table */
+table {
+  display: block;
+  border-spacing: 0;
+  font-size: 16px;
+  text-align: center;
+  overflow-x: auto;
+  width: 100%;
+}
+
+.collapse {
+  border-collapse: collapse;
+}
+
+thead th {
+  padding: 10px 15px;
+  border: 1px solid #d8d8d8;
+  background: #cecece;
+}
+
+tbody td {
+  background: #ffffff;
+  border: 1px solid #d8d8d8;
+  padding: 10px 15px;
+  word-break: break-all;
+}
+
+tbody tr:nth-child(2n) td {
+  background: #e9e9e9;
+}
+/* Table */
+
+/* Global */
+
+/* Loading Modal */
+.loading {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  background: #ffffffb0;
+  cursor: not-allowed;
+}
+
+.loading.active {
+  display: block;
+}
+
+.loading span {
+  position: absolute;
+  font-size: 36px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -45%);
+  color: #555555;
+}
+
+.dot-spin {
+  position: relative;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: transparent;
+  color: transparent;
+  box-shadow: 0 -18px 0 0 #00dbde, 12.727926px -12.727926px 0 0 #00dbde, 18px 0 0 0 #00dbde, 12.727926px 12.727926px 0 0 rgba(152, 128, 255, 0), 0 18px 0 0 rgba(152, 128, 255, 0), -12.727926px 12.727926px 0 0 rgba(152, 128, 255, 0), -18px 0 0 0 rgba(152, 128, 255, 0), -12.727926px -12.727926px 0 0 rgba(152, 128, 255, 0);
+  animation: dot-spin 1.5s infinite linear;
+  }
+
+@keyframes dot-spin {
+  0%, 100% {
+      box-shadow: 0 -18px 0 0 #00dbde, 12.727926px -12.727926px 0 0 #00dbde, 18px 0 0 0 #00dbde, 12.727926px 12.727926px 0 -5px rgba(152, 128, 255, 0), 0 18px 0 -5px rgba(152, 128, 255, 0), -12.727926px 12.727926px 0 -5px rgba(152, 128, 255, 0), -18px 0 0 -5px rgba(152, 128, 255, 0), -12.727926px -12.727926px 0 -5px rgba(152, 128, 255, 0);
+  }
+  12.5% {
+      box-shadow: 0 -18px 0 -5px rgba(152, 128, 255, 0), 12.727926px -12.727926px 0 0 #00dbde, 18px 0 0 0 #00dbde, 12.727926px 12.727926px 0 0 #00dbde, 0 18px 0 -5px rgba(152, 128, 255, 0), -12.727926px 12.727926px 0 -5px rgba(152, 128, 255, 0), -18px 0 0 -5px rgba(152, 128, 255, 0), -12.727926px -12.727926px 0 -5px rgba(152, 128, 255, 0);
+  }
+  25% {
+      box-shadow: 0 -18px 0 -5px rgba(152, 128, 255, 0), 12.727926px -12.727926px 0 -5px rgba(152, 128, 255, 0), 18px 0 0 0 #00dbde, 12.727926px 12.727926px 0 0 #00dbde, 0 18px 0 0 #00dbde, -12.727926px 12.727926px 0 -5px rgba(152, 128, 255, 0), -18px 0 0 -5px rgba(152, 128, 255, 0), -12.727926px -12.727926px 0 -5px rgba(152, 128, 255, 0);
+  }
+  37.5% {
+      box-shadow: 0 -18px 0 -5px rgba(152, 128, 255, 0), 12.727926px -12.727926px 0 -5px rgba(152, 128, 255, 0), 18px 0 0 -5px rgba(152, 128, 255, 0), 12.727926px 12.727926px 0 0 #00dbde, 0 18px 0 0 #00dbde, -12.727926px 12.727926px 0 0 #00dbde, -18px 0 0 -5px rgba(152, 128, 255, 0), -12.727926px -12.727926px 0 -5px rgba(152, 128, 255, 0);
+  }
+  50% {
+      box-shadow: 0 -18px 0 -5px rgba(152, 128, 255, 0), 12.727926px -12.727926px 0 -5px rgba(152, 128, 255, 0), 18px 0 0 -5px rgba(152, 128, 255, 0), 12.727926px 12.727926px 0 -5px rgba(152, 128, 255, 0), 0 18px 0 0 #00dbde, -12.727926px 12.727926px 0 0 #00dbde, -18px 0 0 0 #00dbde, -12.727926px -12.727926px 0 -5px rgba(152, 128, 255, 0);
+  }
+  62.5% {
+      box-shadow: 0 -18px 0 -5px rgba(152, 128, 255, 0), 12.727926px -12.727926px 0 -5px rgba(152, 128, 255, 0), 18px 0 0 -5px rgba(152, 128, 255, 0), 12.727926px 12.727926px 0 -5px rgba(152, 128, 255, 0), 0 18px 0 -5px rgba(152, 128, 255, 0), -12.727926px 12.727926px 0 0 #00dbde, -18px 0 0 0 #00dbde, -12.727926px -12.727926px 0 0 #00dbde;
+  }
+  75% {
+      box-shadow: 0 -18px 0 0 #00dbde, 12.727926px -12.727926px 0 -5px rgba(152, 128, 255, 0), 18px 0 0 -5px rgba(152, 128, 255, 0), 12.727926px 12.727926px 0 -5px rgba(152, 128, 255, 0), 0 18px 0 -5px rgba(152, 128, 255, 0), -12.727926px 12.727926px 0 -5px rgba(152, 128, 255, 0), -18px 0 0 0 #00dbde, -12.727926px -12.727926px 0 0 #00dbde;
+  }
+  87.5% {
+      box-shadow: 0 -18px 0 0 #00dbde, 12.727926px -12.727926px 0 0 #00dbde, 18px 0 0 -5px rgba(152, 128, 255, 0), 12.727926px 12.727926px 0 -5px rgba(152, 128, 255, 0), 0 18px 0 -5px rgba(152, 128, 255, 0), -12.727926px 12.727926px 0 -5px rgba(152, 128, 255, 0), -18px 0 0 -5px rgba(152, 128, 255, 0), -12.727926px -12.727926px 0 0 #00dbde;
+  }
+}
+/* Loading Modal */
+
+/* Pagination */
+.pagination {
+  display: flex;
+  gap: 10px;
+}
+
+.pagination select {
+  height: 39px;
+  padding-left: 10px;
+  margin-right: 50px;
+  border: 1px solid #00dbde;
+}
+
+.rc-pagination {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.rc-pagination li {
+  color: #00dbde;
+  border: 1px solid #00dbde;
+  padding: 8px 12px;
+  margin-right: 5px;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.rc-pagination li:hover,
+.rc-pagination li.rc-pagination-item-active {
+  color: white;
+  background-color: #00dbde;
+  cursor: pointer;
+}
+
+.rc-pagination-options {
+  display: none;
+}
+/* Pagination */
+
+/* Auth */
+.login-wrapper,
+.register-wrapper {
+  position: relative;
+  background: url(../public/background.jpg);
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+.login,
+.register {
+  position: absolute;
+  max-width: 500px;
+  background: white;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -55%);
+  padding: 60px 30px;
+  border-radius: 10px;
+}
+
+.login h1,
+.register h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.login input,
+.register input {
+  border: none;
+  border-bottom: 2px solid #cecece;
+  padding-left: 40px;
+}
+
+.login input:focus,
+.register input:focus {
+  border-bottom-color: #555555;
+}
+
+.login input.warning,
+.register input.warning {
+  border-bottom-color: #ff6e6e;
+}
+
+.login svg,
+.register svg {
+  position: absolute;
+  color: #555555;
+  left: 10px;
+  bottom: 18px;
+}
+
+.login button,
+.register button {
+  background: linear-gradient(90deg,#00dbde,#fc00ff);
+  height: 48px;
+  color: #ffffff;
+  font-size: 18px;
+  border: none;
+  border-radius: 24px;
+  outline: none;
+}
+
+.login .not-register,
+.register .to-login {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.login .not-register span:first-child,
+.register .to-login span:first-child {
+  margin-right: 10px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.login .not-register a,
+.register .to-login a {
+  color: #00dbde;
+  text-decoration: underline;
 }
+/* Auth */
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Navbar */
+nav {
+  position: relative;
+  top: 0px;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  margin: auto;
+  padding: 20px 0px;
+  box-shadow: 0 7px 9px 0px #d1d1d1;
+  margin-bottom: 50px;
+}
+
+nav ul {
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  margin: 0;
+  margin-left: 5%;
+  padding: 0;
+}
+
+nav ul li {
+  margin-right: 30px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #555555;
+  font-size: 18px;
+}
+
+nav ul li a.active {
+  color: #00dbde;
+}
+
+.user {
+  color: #555555;
+  font-size: 18px;
+  margin-right: 5%;
+  cursor: pointer;
+}
+
+.logout-wrapper {
+  position: absolute;
+  display: none;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 2;
+}
+
+.logout-wrapper.active {
+  display: block;
+}
+
+.logout-wrapper .logout {
+  position: absolute;
+  top: 50px;
+  right: 5%;
+  background: white;
+  padding: 10px;
+  width: 130px;
+  box-shadow: 2px 2px 5px #c8c8c8;
+}
+
+.logout-wrapper .logout:hover {
+  background: #fbfbfb;
+}
+
+.logout a {
+  text-decoration: none;
+  color: #555555;
+  font-size: 16px;
+}
+/* Navbar */
+
+
+/* Home */
+.input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.input .input-wrapper {
+  width: calc(100% - 100px);
+}
+
+.input input {
+  padding: 10px;
+}
+
+.input button {
+  width: 80px;
+  height: 44px;
+}
+
+.control {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.control .product-action {
+  display: flex;
+  gap: 10px;
+}
+
+table.product input {
+  margin: 0;
+}
+
+table.product .main-image {
+  min-width: 120px;
+}
+
+table.product .product-url {
+  min-width: 230px;
+}
+
+table.product .product-title {
+  width: 800px;
+  min-width: 450px;
+}
+
+table.product .buy-price,
+table.product .sell-price {
+  min-width: 90px;
+}
+
+table.product .ng {
+  min-width: 90px;
+}
+
+table.product .ng span {
+  background: #ff6e6e;
   color: white;
+  padding: 8px 15px;
 }
 
-.App-link {
-  color: #61dafb;
+table.product .export-product,
+table.product .edit-product,
+table.product .remove-product {
+  min-width: 100px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+table.product .main-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
+
+.modal {
+  padding: 20px 30px;
+}
+
+.result {
+  text-align: center;
+}
+
+.modal .message {
+  margin-top: 30px;
+}
+/* Home */
+
+/* Setting */
+.setting ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  margin-top: 50px;
+}
+
+.setting ul li {
+  padding: 10px 15px;
+  color: #9e9e9e;
+  cursor: pointer;
+}
+
+.setting ul li.active {
+  color: #555555;
+  border-bottom: 2px solid #00dbde;
+}
+
+/* AmazonCredential */
+.tab-content {
+  margin-top: 20px;
+}
+
+.register-credential {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.register-credential button {
+  width: 100px;
+}
+/* AmazonCredential */
+
+/* NGSeller */
+.ng-part {
+  max-width: 1000px;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.ng-part .control {
+  justify-content: flex-end;
+  margin-bottom: 10px;
+  gap: 10px;
+}
+
+table input {
+  margin: 0;
+}
+
+table .ng-title {
+  width: 800px;
+  min-width: 200px;
+}
+
+table .ng-edit,
+table .ng-remove,
+table .ng-active {
+  min-width: 100px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.switch input { 
+  opacity: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 1px;
+  bottom: 1px;
+  background-color: white;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #00dbde;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #00dbde;
+}
+
+input:checked + .slider:before {
+  transform: translateX(16px);
+}
+
+.round {
+  border-radius: 34px;
+}
+
+.round:before {
+  border-radius: 50%;
+}
+/* NGSeller */
+
+/* Setting */

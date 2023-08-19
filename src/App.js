@@ -1,25 +1,40 @@
-import logo from './logo.svg';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+
 import './App.css';
+import Home from './page/Home';
+import Login from './page/Login';
+import Navbar from './page/Navbar';
+import Register from './page/Register';
+// import Setting from './page/Setting';
+
+
+const token = localStorage.getItem('token');
+const user = localStorage.getItem('user');
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  if(token === null || user === null){
+    return (
+      <BrowserRouter>
+        <Routes>
+          <Route path='' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='*' element={<Navigate to={''} />} />
+        </Routes>
+      </BrowserRouter>
+    );
+  }
+  else{
+    return (
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path='/home' element={<Home />} />
+          {/* <Route path='/setting' element={<Setting />} /> */}
+          <Route path='*' element={<Navigate to={'home'} />} />
+        </Routes>
+      </BrowserRouter>
+    )
+  }
 }
 
 export default App;
