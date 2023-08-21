@@ -19,7 +19,6 @@ export default function Home(){
         editSellPrice: ''
     });
     const [product, setProduct] = useState([]);
-    const [ng, setNg] = useState({});
     const [warning, setWarning] = useState({
         scrapeURL: false,
         editTitle: false,
@@ -37,45 +36,6 @@ export default function Home(){
     const [counts, setCounts] = useState(0);
     const [current, setCurrent] = useState(1);
     const [itemPerPageValue, setItemPerPageValue] = useState(itemPerPage[0]);
-
-    useEffect(() => {
-        endpoints.getCredential().then((response) => {
-            let credential = response.data;
-            if(!credential['aws_access_key']){
-                setShowModal({
-                    ...showModal, enableAmazon: false
-                });
-            }
-        }).catch((error) => {
-            console.log(error);
-        });
-        let params = {
-            is_active: true
-        };
-        params = new URLSearchParams(params);
-        endpoints.getNG(params).then((response) => {
-            let result = response.data;
-            let ngs = {
-                brand: [],
-                maker: [],
-                category: []
-            };
-            result.map((item) => {
-                if(item['type'] == 'Brand'){
-                    ngs['brand'].push(item['name']);
-                }
-                else if(item['type'] == 'Maker'){
-                    ngs['maker'].push(item['name']);
-                }
-                else{
-                    ngs['category'].push(item['name']);
-                }
-            });
-            setNg(ngs);
-        }).catch((error) => {
-            console.log(error);
-        });
-    }, []);
 
     useEffect(() => {
         if (!searchParams.get('page')){
@@ -143,34 +103,6 @@ export default function Home(){
         }
     }
 
-    function checkNg(product){
-        let check = false;
-        for(let i=0; i<ng['category'].length; i++){
-            if(product['category'].includes(ng['category'][i]) || product['title'].includes(ng['category'][i])){
-                check = true;
-                break;
-            }
-        }
-        if(check){
-            return check;
-        }
-        for(let i=0; i<ng['maker'].length; i++){
-            if(product['maker'].includes(ng['maker'][i])){
-                check = true;
-                break;
-            }
-        }
-        if(check){
-            return check;
-        }
-        for(let i=0; i<ng['brand'].length; i++){
-            if(product['brand'].includes(ng['brand'][i])){
-                check = true;
-                break;
-            }
-        }
-        return check;
-    }
 
     function handleSellProduct(id){
         setLoading(true);
@@ -351,70 +283,62 @@ export default function Home(){
                             {/* <th>説明</th> */}
                             <th className='buy-price'>原価(円)</th>
                             <th className='sell-price'>販売価(円)</th>
-                            <th className='ng'>NG</th>
                             <th className='export-product'>出品</th>
                             <th className='edit-product'>編集</th>
                             <th className='remove-product'>削除</th>
                         </tr>
                     </thead>
 
-                    {ng &&
-                        <tbody id='products'>
-                            {product.map((item, index) => (
-                                <tr key={index}>
-                                    <td>
-                                        <input type="checkbox" onChange={(e) => {handleProductCheckedChange(e, item['id'])}} />
-                                    </td>
-                                    <td>{index + 1 + (itemPerPageValue) * (current-1)}</td>
-                                    <td className='main-image'>
-                                        {
-                                            item['productphoto_set'].length > 0 &&
-                                            <img src={item['productphoto_set'][0]['path']} alt="Main Image" />
-                                        }
-                                    </td>
-                                    <td className='product-url'>
-                                        {item['source_url']}
-                                    </td>
-                                    <td className='product-title'>
-                                        {item['title']}
-                                    </td>
-                                    {/* <td className='product-description'>
-                                        {item['description']}
-                                    </td> */}
-                                    <td className='buy-price'>
-                                        {item['buy_price']}
-                                    </td>
-                                    <td className='sell-price'>
-                                        {item['sell_price']}
-                                    </td>
-                                    <td className='ng'>
-                                        {checkNg(item) && 
-                                            <span>NG</span>
-                                        }
-                                    </td>
-                                    <td className='export-product'>
-                                        <Button 
-                                            text="出品"
-                                            onClick={() => handleSellProduct(item['id'])}
-                                        />
-                                    </td>
-                                    <td className='edit-product'>
-                                        <Button 
-                                            text='編集'
-                                            onClick={() => {callEditModal(item['id'], item['title'], item['sell_price'])}}
-                                        />
-                                    </td>
-                                    <td className='remove-product'>
-                                        <Button 
-                                            text='削除'
-                                            onClick={() => {handleRemoveProduct(item['id'])}}
-                                        />
-                                    </td>
-                                </tr>
-                            ))}
-                            
-                        </tbody>
-                    }
+                    <tbody id='products'>
+                        {product.map((item, index) => (
+                            <tr key={index}>
+                                <td>
+                                    <input type="checkbox" onChange={(e) => {handleProductCheckedChange(e, item['id'])}} />
+                                </td>
+                                <td>{index + 1 + (itemPerPageValue) * (current-1)}</td>
+                                <td className='main-image'>
+                                    {
+                                        item['productphoto_set'].length > 0 &&
+                                        <img src={item['productphoto_set'][0]['path']} alt="Main Image" />
+                                    }
+                                </td>
+                                <td className='product-url'>
+                                    {item['source_url']}
+                                </td>
+                                <td className='product-title'>
+                                    {item['title']}
+                                </td>
+                                {/* <td className='product-description'>
+                                    {item['description']}
+                                </td> */}
+                                <td className='buy-price'>
+                                    {item['buy_price']}
+                                </td>
+                                <td className='sell-price'>
+                                    {item['sell_price']}
+                                </td>
+                                <td className='export-product'>
+                                    <Button 
+                                        text="出品"
+                                        onClick={() => handleSellProduct(item['id'])}
+                                    />
+                                </td>
+                                <td className='edit-product'>
+                                    <Button 
+                                        text='編集'
+                                        onClick={() => {callEditModal(item['id'], item['title'], item['sell_price'])}}
+                                    />
+                                </td>
+                                <td className='remove-product'>
+                                    <Button 
+                                        text='削除'
+                                        onClick={() => {handleRemoveProduct(item['id'])}}
+                                    />
+                                </td>
+                            </tr>
+                        ))}
+                        
+                    </tbody>
                 </table>
             </div>
             
