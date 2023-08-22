@@ -428,6 +428,10 @@ table.product input {
   margin: 0;
 }
 
+table.product .number {
+  min-width: 60px;
+}
+
 table.product .main-image {
   min-width: 120px;
 }

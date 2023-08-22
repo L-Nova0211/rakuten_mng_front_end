@@ -276,7 +276,7 @@ export default function Home(){
                             <th>
                                 <input type="checkbox" onChange={handleSelectAllChange} />
                             </th>
-                            <th>No</th>
+                            <th className='number'>No</th>
                             <th className='main-image'>メイン画像</th>
                             <th className='product-url'>URL</th>
                             <th className='product-title'>タイトル</th>
@@ -295,7 +295,7 @@ export default function Home(){
                                 <td>
                                     <input type="checkbox" onChange={(e) => {handleProductCheckedChange(e, item['id'])}} />
                                 </td>
-                                <td>{index + 1 + (itemPerPageValue) * (current-1)}</td>
+                                <td className='number'>{index + 1 + (itemPerPageValue) * (current-1)}</td>
                                 <td className='main-image'>
                                     {
                                         item['productphoto_set'].length > 0 &&
