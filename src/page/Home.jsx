@@ -256,7 +256,7 @@ export default function Home(){
                 <div className='product-action'>
                     <Button
                         btnClassName={bulkProductId.length > 0 ? 'btn btn-green' : 'btn btn-green btn-disabled'}
-                        text='商品ダウンロード'
+                        text='一括出品'
                         icon={faFileExport}
                         onClick={handleBulkSellProducts}
                     />
