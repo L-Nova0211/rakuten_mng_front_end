@@ -44,6 +44,11 @@ const endpoints = {
 
     // Get Product
     getProduct: (params) =>  api.get(`product/?${params}`),
+
+    // bulk Remove Product
+    bulkRemoveProduct: (idArray) => api.post('product/bulk_remove_product/', {
+        idArray: idArray
+    }),
 };
 
 export default endpoints;
