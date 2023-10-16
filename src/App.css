@@ -605,3 +605,7 @@ input:checked + .slider:before {
 /* NGSeller */
 
 /* Setting */
+
+.flag, .product_name, .product_SKU, .update_flag, .super_flag, .inventory, .sale_money, .origin_money, .send_money, .rest_money, .point_back, .utility_money, .utility_pro, .product_ROI {
+  min-width: 95px;
+}

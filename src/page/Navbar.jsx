@@ -31,6 +31,11 @@ export default function Navbar(){
                         </NavLink>
                     </li>
                     <li>
+                        <NavLink to='productManager'>
+                            商品設定
+                        </NavLink>
+                    </li>
+                    <li>
                         <NavLink to='setting'>
                             設定
                         </NavLink>
