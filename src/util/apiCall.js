@@ -46,6 +46,15 @@ const endpoints = {
     bulkRemoveProduct: (idArray) => api.post('product/bulk_remove_product/', {
         idArray: idArray
     }),
+
+    // Get Setting
+    getSetting: () => api.get('setting/'),
+
+    // Register Setting
+    registerSetting: (data) => api.post('setting/register/', data),
+
+    // Update Setting
+    updateSetting: (data) =>  api.post('setting/change/', data)
 };
 
 export default endpoints;
