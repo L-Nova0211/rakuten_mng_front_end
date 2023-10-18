@@ -9,7 +9,11 @@ import Loading from '../component/Loading';
 import PaginationComponent from '../component/Pagination';
 import endpoints from '../util/apiCall';
 
-export default function Home(){
+export default function ProductManager(){
+    const productStatus = {
+        'Inactive': '倉庫',
+        'Active': '販売中'
+    };
     const [searchParams, setSearchParams] = useSearchParams();
     const [state, setState] = useState({
         id: '',
@@ -45,7 +49,7 @@ export default function Home(){
         let params = {
             limit: searchParams.get('displays') || itemPerPageValue, 
             offset: searchParams.get('displays') * (searchParams.get('page') - 1),
-            status: 'Draft'
+            status: 'notDraft'
         };
         params = new URLSearchParams(params);
         endpoints.getProduct(params).then((response) => {
@@ -264,15 +268,15 @@ export default function Home(){
                             <th className='number'>No</th>
                             <th className='flag'>フラグ</th>
                             <th className='product_name'>商品名</th>
-                            <th className='product_SKU'>SKU</th>
-                            <th className='update_flag'>更新フラグ</th>
-                            <th className='super_flag'>仕入れ原価上限フラグ</th>
+                            <th className='product_SKU'>管理番号</th>
+                            {/* <th className='update_flag'>更新フラグ</th> */}
+                            {/* <th className='super_flag'>仕入れ原価上限フラグ</th> */}
                             <th className='inventory'>在庫数設定</th>
                             <th className='sale_money'>販売価格(円)</th>
                             <th className='origin_money'>原価(円)</th>
                             <th className='send_money'>送料(円)</th>
                             <th className='rest_money'>手数料(円)</th>
-                            <th className='point_back'>ポイント還元</th>
+                            <th className='point_back'>ポイント</th>
                             <th className='utility_money'>粗利額(円)</th>
                             <th className='utility_pro'>粗利率(%)</th>
                             <th className='product_ROI'>ROI(%)</th>
@@ -280,63 +284,46 @@ export default function Home(){
                     </thead>
 
                     <tbody id='products'>
-                        {/* {product.map((item, index) => ( */}
-                            <tr>
+                        {product.map((item, index) => (
+                            <tr key={index}>
                                 <td>
                                     <input type="checkbox" onChange={(e) => {handleProductCheckedChange(e, ['id'])}} />
                                 </td>
-                                <td className='number'>{ 1 + (itemPerPageValue) * (current-1)}</td>
+                                <td className='number'>{index + 1 + (itemPerPageValue) * (current-1)}</td>
                                 <td className='flag'>
-                                    {/* {
-                                        item['productphoto_set'].length > 0 &&
-                                        <img src={item['productphoto_set'][0]['path']} alt="Main Image" />
-                                    } */}
-                                    true or false
+                                    {productStatus[item['status']]}
                                 </td>
                                 <td className='product_name'>
-                                    product_name
-                                </td>
-                                <td className='update_flag'>
-                                    product_SKU
+                                    {item['title']}
                                 </td>
                                 <td className=''>
+                                    {item['manager_number']}
+                                </td>
+                                {/* <td className='update_flag'>
                                     update_flag
-                                </td>
-                                <td className='super_flag'>
+                                </td> */}
+                                {/* <td className='super_flag'>
                                     super_flag
-                                </td>
+                                </td> */}
                                 <td className='inventory'>
-                                    {/* {item['sell_price']} */}
-                                    inventory
+                                    {item['quantity']}
                                 </td>
                                 <td className='sale_money'>
-                                    {/* <Button 
-                                        text="出品"
-                                        onClick={() => handleSellProduct(item['id'])}
-                                    /> */}
-                                    sale_money
+                                   {item['sell_price']}
                                 </td>
                                 <td className='origin_money'>
-                                    {/* <Button 
-                                        text='編集'
-                                        onClick={() => {callEditModal(item['id'], item['title'], item['sell_price'])}}
-                                    /> */}
-                                    origin_money
+                                    {item['buy_price']}
                                 </td>
                                 <td className='send_money'>
-                                    {/* <Button 
-                                        text='削除'
-                                        onClick={() => {handleRemoveProduct(item['id'])}}
-                                    /> */}
                                     send_money
                                 </td>
                                 <td className='rest_money'>rest_money</td>
                                 <td className='point_back'>point_back</td>
-                                <td className='utility_money'>gerchin_money</td>
+                                <td className='utility_money'>{item['profit']}</td>
                                 <td className='utility_pro'>joryul</td>
                                 <td className='product_ROI'>ROI(%)</td>
                             </tr>
-                        {/* ))} */}
+                        ))}
                         
                     </tbody>
                 </table>
