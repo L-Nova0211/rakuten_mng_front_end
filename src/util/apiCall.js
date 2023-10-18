@@ -47,6 +47,11 @@ const endpoints = {
         idArray: idArray
     }),
 
+    // bulk Insert Product
+    bulkInsertProduct: (idArray) => api.post('product/insert_products/', {
+        idArray: idArray
+    }),
+
     // Get Setting
     getSetting: () => api.get('setting/'),
 
