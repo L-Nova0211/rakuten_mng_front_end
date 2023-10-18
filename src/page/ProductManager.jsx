@@ -297,7 +297,7 @@ export default function ProductManager(){
                                     {item['title']}
                                 </td>
                                 <td className=''>
-                                    {item['manager_number']}
+                                    {item['manage_number']}
                                 </td>
                                 {/* <td className='update_flag'>
                                     update_flag
@@ -315,13 +315,13 @@ export default function ProductManager(){
                                     {item['buy_price']}
                                 </td>
                                 <td className='send_money'>
-                                    send_money
+                                    {item['shipping_fee']}
                                 </td>
-                                <td className='rest_money'>rest_money</td>
-                                <td className='point_back'>point_back</td>
+                                <td className='rest_money'>{item['rakuten_fee']}</td>
+                                <td className='point_back'>{item['point']}</td>
                                 <td className='utility_money'>{item['profit']}</td>
-                                <td className='utility_pro'>joryul</td>
-                                <td className='product_ROI'>ROI(%)</td>
+                                <td className='utility_pro'>{(item['profit']/item['sell_price']).toFixed(2)}</td>
+                                <td className='product_ROI'>{(item['profit']/item['buy_price']).toFixed(2)}</td>
                             </tr>
                         ))}
                         
