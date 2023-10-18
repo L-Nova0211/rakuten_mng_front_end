@@ -198,17 +198,12 @@ export default function Home(){
 
     function handleBulkSellProducts(){
         setLoading(true);
-        endpoints.downloadProducts(bulkProductId).then((response) => {
+        endpoints.bulkInsertProduct(bulkProductId).then((response) => {
             setLoading(false);
-            setMessage(response.data);
-            setShowModal({
-                ...showModal, result: true
-            });
-            window.location.href = `${process.env.REACT_APP_API}/media/Inventory.xlsm`;
         }).catch((error) => {
             setLoading(false);
             console.log(error);
-        });
+        })
     }
     
     function handleBulkRemoveProducts(){
