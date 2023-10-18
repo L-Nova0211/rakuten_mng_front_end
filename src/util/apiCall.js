@@ -31,9 +31,6 @@ const endpoints = {
         password: password
     }),
 
-    // Update
-    update: (id, data) => api.patch(`users/${id}/`, data),
-
     // Logout
     logout: () => api.post('users/logout/'),
 
