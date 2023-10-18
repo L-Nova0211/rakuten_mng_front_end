@@ -6,7 +6,7 @@ import Login from './page/Login';
 import Navbar from './page/Navbar';
 import Register from './page/Register';
 import ProductManager from './page/ProductManager';
-// import Setting from './page/Setting';
+import Setting from './page/Setting';
 
 
 const token = localStorage.getItem('token');
@@ -31,7 +31,7 @@ function App() {
         <Routes>
           <Route path='/home' element={<Home />} />
           <Route path='/productManager' element={<ProductManager />} />
-          {/* <Route path='/setting' element={<Setting />} /> */}
+          <Route path='/setting' element={<Setting />} />
           <Route path='*' element={<Navigate to={'home'} />} />
         </Routes>
       </BrowserRouter>
