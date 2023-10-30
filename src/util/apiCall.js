@@ -42,6 +42,9 @@ const endpoints = {
     // Get Product
     getProduct: (params) =>  api.get(`product/?${params}`),
 
+    // Update Product
+    updateProduct: (id, data) => api.patch(`product/${id}/`, data),
+
     // bulk Remove Product
     bulkRemoveProduct: (idArray) => api.post('product/bulk_remove_product/', {
         idArray: idArray
