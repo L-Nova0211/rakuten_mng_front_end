@@ -134,7 +134,7 @@ export default function Setting() {
                 <div className="input p-1">
                     <div className="input">
                         <label>楽天手数料</label>
-                        <select style={{padding: "10px 7px"}} name="rakutenFee" value={state['rakutenFee']} onChange={handleChange}>
+                        <select name="rakutenFee" value={state['rakutenFee']} onChange={handleChange}>
                             <option value="0">0</option>
                             <option value="8">8</option>
                             <option value="10">10</option>
