@@ -21,6 +21,11 @@ a {
   text-decoration: none;
 }
 
+select {
+  padding: 10px 7px;
+  border: 1px solid rgb(143, 143, 143);    
+}
+
 .container {
   width: 90%;
   margin: auto;
@@ -29,7 +34,7 @@ a {
 .row {
   position: relative;
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .red {
@@ -41,9 +46,9 @@ input {
   color: #555555;
   font-size: 14px;
   font-family: 'NotoSansJP-Regular';
-  padding: 15px 10px;
+  padding: 10px;
   outline: none;
-  border: 1px solid black;    
+  border: 1px solid rgb(143, 143, 143);    
   transition: 0.4s;
 }
 
@@ -91,7 +96,7 @@ button svg {
 table {
   display: block;
   border-spacing: 0;
-  font-size: 16px;
+  font-size: 14px;
   text-align: center;
   overflow-x: auto;
   width: 100%;
@@ -102,7 +107,7 @@ table {
 }
 
 thead th {
-  padding: 10px 15px;
+  padding: 8px 5px;
   border: 1px solid #d8d8d8;
   background: #cecece;
 }
@@ -110,7 +115,7 @@ thead th {
 tbody td {
   background: #ffffff;
   border: 1px solid #d8d8d8;
-  padding: 10px 15px;
+  padding: 8px 5px;
   word-break: break-all;
 }
 
@@ -404,10 +409,6 @@ nav ul li a.active {
   width: calc(100% - 100px);
 }
 
-.input input {
-  padding: 10px;
-}
-
 .input button {
   width: 80px;
   height: 44px;
@@ -428,26 +429,60 @@ table.product input {
   margin: 0;
 }
 
+table.product .checkbox {
+  padding: 8px 15px;
+}
+
 table.product .number {
-  min-width: 60px;
+  min-width: 40px;
 }
 
 table.product .main-image {
-  min-width: 120px;
+  width: 80px;
+  min-width:80px;
 }
 
-table.product .product-url {
-  min-width: 230px;
+table.product .product-jan, 
+table.product .manage-number {
+  width: 200px;
+  min-width: 100px;
 }
 
 table.product .product-title {
   width: 800px;
-  min-width: 450px;
+  min-width: 300px;
+}
+
+table.product .product-status,
+table.product .product-quantity,
+table.product .count-set,
+table.product .shipping-fee,
+table.product .price-fee,
+table.product .point,
+table.product .profit,
+table.product .profit-rate,
+table.product .roi {
+  width: 100px;
+  min-width: 30px;
+}
+
+table.product .product-site {
+  width: 100px;
+  min-width: 50px;
+}
+
+table.product .product-site a {
+  color: black;
+  text-decoration: underline;
+}
+
+table.product .unit-price {
+  min-width: 90px;
 }
 
 table.product .buy-price,
 table.product .sell-price {
-  min-width: 90px;
+  min-width: 70px;
 }
 
 table.product .ng {
@@ -460,10 +495,12 @@ table.product .ng span {
   padding: 8px 15px;
 }
 
-table.product .export-product,
-table.product .edit-product,
-table.product .remove-product {
-  min-width: 100px;
+table.product .product-edit,
+table.product .product-export,
+table.product .product-update,
+table.product .product-warehouse,
+table.product .product-remove {
+  min-width: 80px;
 }
 
 table.product .main-image img {
@@ -473,7 +510,9 @@ table.product .main-image img {
 }
 
 .modal {
+  overflow-y: scroll;
   padding: 20px 30px;
+  height: 100%;
 }
 
 .result {
@@ -482,6 +521,10 @@ table.product .main-image img {
 
 .modal .message {
   margin-top: 30px;
+}
+
+.modal select {
+  width: 100%;
 }
 /* Home */
 
