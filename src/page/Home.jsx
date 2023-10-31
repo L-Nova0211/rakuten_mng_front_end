@@ -120,7 +120,11 @@ export default function Home(){
                 window.location.href = '';
             }).catch((error) => {
                 setLoading(false);
-                console.log(error);
+                setMessage('操作が失敗しました。もう一度お試しください。');
+                setShowModal({
+                    ...showModal,
+                    error: true
+                });
             });
         }
     }
