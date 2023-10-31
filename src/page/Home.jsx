@@ -286,7 +286,7 @@ export default function Home(){
             setLoading(false);
             setMessage(response.data);
             setShowModal({
-                ...showModal, success: true
+                ...showModal, error: true
             });
         }).catch((error) => {
             setLoading(false);
