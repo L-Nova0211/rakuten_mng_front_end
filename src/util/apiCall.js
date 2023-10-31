@@ -55,6 +55,9 @@ const endpoints = {
         idArray: idArray
     }),
 
+    // Patch Product
+    patchProduct: (id, data) => api.post(`product/${id}/patch_product/`, data),
+
     // Get Setting
     getSetting: () => api.get('setting/'),
 
