@@ -58,6 +58,11 @@ const endpoints = {
     // Patch Product
     patchProduct: (id, data) => api.post(`product/${id}/patch_product/`, data),
 
+    // bulk Deactive Product
+    bulkDeactiveProducts: (idArray) => api.post('product/bulk_deactive_product/', {
+        idArray: idArray
+    }),
+
     // Get Setting
     getSetting: () => api.get('setting/'),
 
