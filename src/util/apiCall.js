@@ -63,6 +63,11 @@ const endpoints = {
         idArray: idArray
     }),
 
+    // bulk Remove Product From Rakuten
+    bulkRemoveProductFromRakuten: (idArray) => api.post('product/bulk_remove_product_from_rakuten/', {
+        idArray: idArray
+    }),
+
     // Get Setting
     getSetting: () => api.get('setting/'),
 
