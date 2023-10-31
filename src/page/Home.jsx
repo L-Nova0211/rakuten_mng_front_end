@@ -252,10 +252,27 @@ export default function Home(){
     function handleBulkSellProducts(){
         setLoading(true);
         endpoints.bulkInsertProduct(bulkProductId).then((response) => {
+            let data = response.data;
+            let message = '';
+            if(data['success'].length > 0) {
+                message += `${data['success'].length}件の商品が正常に登録されました。\n`
+            }
+            if(data['failed'].length > 0) {
+                message += `${data['failed'].length}件の商品登録が失敗しました。\n`
+            }
             setLoading(false);
+            setMessage(message);
+            setShowModal({
+                ...showModal,
+                success: true
+            });
         }).catch((error) => {
             setLoading(false);
-            console.log(error);
+            setMessage('操作が失敗しました。もう一度お試しください。');
+            setShowModal({
+                ...showModal,
+                error: true
+            });
         })
     }
     
@@ -509,11 +526,11 @@ export default function Home(){
                 </div>
             </Modal>
 
-            {/* Enable Amazon */}
+            {/* Enable Rakuten */}
             <Modal visible={!showModal['enableRakuten']} width="400" height="200">
                 <div className='modal result'>
                     <div className='message row'>
-                        設定ページで「AmazonCredential」情報を入力します。
+                        設定ページで「RakutenCredential」情報を入力します。
                     </div>
                     <Button 
                         className='row'
