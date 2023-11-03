@@ -32,7 +32,12 @@ export default function Navbar(){
                     </li>
                     <li>
                         <NavLink to='productManager'>
-                            商品設定
+                            商品管理
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to='orderManager'>
+                            受注管理
                         </NavLink>
                     </li>
                     <li>
