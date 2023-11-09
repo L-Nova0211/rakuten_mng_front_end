@@ -18,6 +18,7 @@ export default function ProductManager(){
     const [searchParams, setSearchParams] = useSearchParams();
     const [state, setState] = useState({
         id: '',
+        searchTitle:  '',
         editTitle: '',
         editSellPrice: '',
         editPoint: '',
@@ -34,6 +35,7 @@ export default function ProductManager(){
     const [shippingMethodDom, setShippingMethodDom] = useState([]);
     const [product, setProduct] = useState([]);
     const [warning, setWarning] = useState({
+        searchTitle: false,
         editTitle: false,
         editSellPrice: false,
         editPoint: false,
@@ -104,6 +106,33 @@ export default function ProductManager(){
         setState({
             ...state,
             [target.name]: target.value
+        });
+    }
+
+    function handleSearch() {
+        if(state['searchTitle'] === '') {
+            setWarning({
+                ...warning, searchTitle: true
+            });
+            return;
+        }
+        let params = {
+            limit: itemPerPageValue,
+            offset: 0,
+            status: 'Active',
+            search: state['searchTitle']
+        };
+        params = new URLSearchParams(params);
+        endpoints.getProduct(params).then((response) => {
+            console.log(response);
+            let counts = response.data.count;
+            let products = response.data.results;
+            setCounts(counts);
+            setTimeout(() => {
+                setProduct(products);
+            }, 500);
+        }).catch((error) => {
+            console.log(error);
         });
     }
 
@@ -317,14 +346,15 @@ export default function ProductManager(){
                     className='input-wrapper'
                     type='text'
                     placeholder='商品名をご入力ください。'
-                    name='scrapeURL'
-                    warning={warning['scrapeURL']}
+                    name='searchTitle'
+                    warning={warning['searchTitle']}
                     onChange={handleChange}
                 />
                 <Button
                     btnClassName='btn btn-green'
                     text='検 索'
                     icon={faSearch}
+                    onClick={handleSearch}
                 />
             </div>
 
