@@ -36,11 +36,6 @@ export default function Navbar(){
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to='orderManager'>
-                            受注管理
-                        </NavLink>
-                    </li>
-                    <li>
                         <NavLink to='setting'>
                             設定
                         </NavLink>
