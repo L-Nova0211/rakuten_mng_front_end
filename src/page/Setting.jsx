@@ -14,9 +14,9 @@ export default function Setting() {
         shipping80: '',
         shipping100: '',
         shipping120: '',
-        updateAmazon: '',
-        updateOroshi: '',
-        updateTajimaya: '',
+        // updateAmazon: '',
+        // updateOroshi: '',
+        // updateTajimaya: '',
         rakutenFee: "0"
     });
     const [existSetting, setExistSetting] = useState(false);
@@ -34,9 +34,9 @@ export default function Setting() {
                     shipping80: (response.data[0]['shipping_80_fee']).toString(),
                     shipping100: (response.data[0]['shipping_100_fee']).toString(),
                     shipping120: (response.data[0]['shipping_120_fee']).toString(),
-                    updateAmazon: (response.data[0]['scraping_update_amazon_from']).toString(),
-                    updateOroshi: (response.data[0]['scraping_update_oroshi_from']).toString(),
-                    updateTajimaya: (response.data[0]['scraping_update_tajimaya_from']).toString(),
+                    // updateAmazon: (response.data[0]['scraping_update_amazon_from']).toString(),
+                    // updateOroshi: (response.data[0]['scraping_update_oroshi_from']).toString(),
+                    // updateTajimaya: (response.data[0]['scraping_update_tajimaya_from']).toString(),
                     rakutenFee: (response.data[0]['rakuten_fee']).toString(),
                 });
             }
@@ -109,7 +109,7 @@ export default function Setting() {
                     </div>
                 </div>
             </div>
-            <div>
+            {/* <div>
                 <div className="border-b py-1 font-bold">データ取得</div>
                 <div className="input flex-wrap">
                     <div className="input w-50 p-1">
@@ -128,7 +128,7 @@ export default function Setting() {
                         <span className="w-20 px-1">時から</span>
                     </div>
                 </div>
-            </div>
+            </div> */}
             <div>
                 <div className="border-b py-1 font-bold">その他設定</div>
                 <div className="input p-1">
