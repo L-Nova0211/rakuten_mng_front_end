@@ -264,6 +264,9 @@ export default function Home(){
             if(data['failed'].length > 0) {
                 message += `${data['failed'].length}件の商品登録が失敗しました。\n`
             }
+            if(data['duplicate'].length > 0) {
+                message += `${data['duplicate'].length}件の商品はすでに展示されています。\n`
+            }
             setLoading(false);
             setMessage(message);
             setShowModal({
